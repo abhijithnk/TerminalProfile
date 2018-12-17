@@ -1,0 +1,67 @@
+#
+## My Aliases
+
+#vim
+#alias vi='vim'
+#alias vi='/tool/pandora64/.package/vim-7.3-a/bin/vim'
+#alias vi='/tool/pandora64/.package/vim-7.3-b/bin/vim'
+#alias vi='/tool/pandora64/.package/vim-7.3-c/bin/vim'
+#alias vi='/tool/pandora64/.package/vim-7.3-d/bin/vim'
+#alias vi='/tool/pandora64/.package/vim-7.4-a/bin/vim'
+alias vi='/tool/pandora64/.package/vim-8.0/bin/vim'
+alias vimdiff='/tool/pandora64/.package/vim-8.0/bin/vimdiff'
+alias gvim='/tool/pandora64/.package/vim-8.0/bin/gvim'
+#alias vi='/tool/pandora64/.package/vim-7.4/bin/vim'
+#alias vi='/tool/pandora64/.package/vim-7.4-a/bin/vim'
+#shell
+alias eal="vi ~/.aliases"
+alias sal="source ~/.aliases"
+alias eb="vi ~/.bash_profile"
+alias sb="source ~/.bash_profile"
+alias ec="vi ~/.cshrc"
+alias ev="vi ~/.vimrc"
+#grep
+#alias grep='/tool/pandora64/.package/grep-2.5.4/bin/grep --exclude-dir=.svn'
+alias grep='/tool/pandora64/.package/grep-2.22/bin/grep --exclude-dir=.svn --exclude=*~'
+alias egrep='/tool/pandora64/.package/grep-2.22/bin/egrep --exclude-dir=.svn'
+alias fgrep='/tool/pandora64/.package/grep-2.22/bin/fgrep --exclude-dir=.svn'
+#cscope
+alias cs='cscope -d'
+csfnb (){
+    echo -e "Running cscope find in $PWD\n"
+    find $PWD/ -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "*.hpp" -o -name "*.cfg" -o -name "*.pl" -o -name "*.py" > $PWD/cscope.files
+    echo -e "Building cscope database"
+    cscope -q -R -b -i cscope.files
+    
+    echo $PWD >> ~/my_utilsFiles/cscopeRepository.list
+    uniq ~/my_utilsFiles/cscopeRepository.list > ~/my_utilsFiles/cscopeRepository.list.temp && mv ~/my_utilsFiles/cscopeRepository.list.temp ~/my_utilsFiles/cscopeRepository.list
+}
+#ctags
+alias ctags='/tool/pandora64/hdk-4.8.1/19/bin/ctags'
+#gdb
+alias gdb771='/tool/pandora64/.package/gdb-7.7.1/bin/gdb'
+## Command aliases
+#svn
+svnupdate (){
+#set -x
+    if [[ $PWD/ == /proj/zna_correlation/abkashyap/zensimDir1/ ]]
+    then
+        svnup && echo -e "\nRunning cscope find" && find /proj/zna_correlation/abkashyap/zensimDir1/ -name "*.c" -o -name "*.h" -o -name "*.cpp" -o -name "*.hpp" -o -name "*.cfg" -o -name "*.pl" -o -name "*.py" > /proj/zna_correlation/abkashyap/zensimDir1/cscope.files && echo -e "\nBuilding cscope database" && cscope -q -R -b -i cscope.files
+        echo $PWD >> ~/my_utilsFiles/cscopeRepository.list
+        uniq ~/my_utilsFiles/cscopeRepository.list > ~/my_utilsFiles/cscopeRepository.list.temp && mv ~/my_utilsFiles/cscopeRepository.list.temp ~/my_utilsFiles/cscopeRepository.list
+    else
+        svnup
+    fi
+#set +x
+}
+
+#Taskbar
+#gnome-panel
+
+#Find dir skeleton and exec
+#find -type d -exec mkdir -p "../../ldqScannerPfEnRegression/rtl_runs/{}" \;
+#find . ! -name 'file.txt' -type f -exec rm -f {} +
+#ls | grep -v file.txt | xargs rm
+#bjobs | awk '$3=="PEND" {print $1;} | xargs bkill
+#find -mindepth 3 -path "./cinebench*" -name "rtl.statsum.gz" | xargs zgrep "mpu0.cx0.cl0.core0.ls.LSDispatchLdDispatchPMC.PMCPerfMonLdDispatch" .
+#find . ! -name "tbat.args" -exec rm -f {} +       -----> removes all except tbat.args from dir
